@@ -22,12 +22,27 @@ class LoginController extends Controller
             return response()->json(["nome" => $usuario->name, "token" => $usuario->createToken("day")->plainTextToken]);
         }
 
-        return response()->json("Parece que algo não funcionou.");
+        return response()->json("Parece que algo não funcionou.", 203);
     }
 
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
         return response()->json("Success");
+    }
+
+    public function register(Request $request)
+    {
+        if ($request->password === $request->confirmationPassword) {
+            $usuario = User::create(
+                [
+                    "name" => $request->name, "password" => Hash::make($request->password),
+                    "email" => $request->email
+                ]
+            );
+            return response()->json(["nome" => $usuario->name, "token" => $usuario->createToken("devs")->plainTextToken]);
+        } else {
+            return response()->json('Parece que algo não funcionou como devia.', 203);
+        }
     }
 }

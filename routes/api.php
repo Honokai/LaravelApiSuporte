@@ -10,6 +10,7 @@ use App\Models\SubCategoria;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/login", [LoginController::class, "login"]);
+Route::post("/register", [LoginController::class, "register"]);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::post("/sair", [LoginController::class, "logout"]);
