@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\StatusEnum;
 use App\Models\Chamado;
 use App\Models\SubCategoria;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,6 +19,7 @@ class ChamadoResource extends JsonResource
             "solicitacao" => $this->solicitacao,
             "subcategoria" => SubcategoriaResource::make($this->subcategoria),
             "setor" => SetorResource::make($this->setor),
+            "status" => StatusEnum::getKey(intval($this->status)),
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
             "responsavel" => $this->responsavel,

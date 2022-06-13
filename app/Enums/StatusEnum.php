@@ -11,8 +11,8 @@ use BenSampo\Enum\Enum;
  */
 final class StatusEnum extends Enum
 {
-    const ABERTO =   0;
-    const EM_ANDAMENTO =   1;
-    const FECHADO = 2;
-    const REABERTO = 3;
+    const Aberto =   0;
+    const Em_andamento =   1;
+    const Fechado = 2;
+    const Reaberto = 3;
 }

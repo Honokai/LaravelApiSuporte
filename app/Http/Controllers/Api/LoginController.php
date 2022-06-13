@@ -22,7 +22,7 @@ class LoginController extends Controller
             return response()->json(["nome" => $usuario->name, "token" => $usuario->createToken("day")->plainTextToken]);
         }
 
-        return response()->json("Parece que algo não funcionou.", 203);
+        return response()->json(["mensagem" => "Parece que algo não funcionou."], 203);
     }
 
     public function logout(Request $request)

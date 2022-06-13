@@ -38,7 +38,7 @@ class RespostaController extends Controller
                 new Resposta(["conteudo" => $request->solicitacao, "user_id" =>  $request->user()->id])
             );
 
-            return Response::json($chamado->respostas()->get()->latest())->status(201);
+            return Response::json($chamado->respostas()->latest()->get()->first(), 201);
         } catch (\Throwable $th) {
             return Response(["mensagem" => $th->getMessage()], 203);
         }
