@@ -38,7 +38,7 @@ class RespostaController extends Controller
             $chamado->respostas()->save(
                 new Resposta(["conteudo" => $request->solicitacao, "user_id" =>  $request->user()->id])
             );
-            ChamadoRespondido::dispatch();
+            ChamadoRespondido::dispatch($chamado->id);
             return Response::json($chamado->respostas()->latest()->get()->first(), 201);
         } catch (\Throwable $th) {
             return Response(["mensagem" => $th->getMessage()], 203);

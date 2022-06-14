@@ -14,14 +14,11 @@ class ChamadoRespondido implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public string $chamado;
+
+    public function __construct($chamado)
     {
-        //
+        $this->chamado = $chamado;
     }
 
     /**
@@ -31,16 +28,11 @@ class ChamadoRespondido implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('comum');
-    }
-
-    public function broadcastAs()
-    {
-        return 'chamado.respondido';
+        return new Channel('comum');
     }
 
     public function broadcastWith()
     {
-        return ['mensagem' => "Seu chamado foi respondido"];
+        return ['titulo' => '', 'mensagem' => "Seu chamado foi respondido"];
     }
 }
