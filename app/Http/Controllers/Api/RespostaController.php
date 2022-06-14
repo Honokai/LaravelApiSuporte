@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ChamadoRespondido;
 use App\Http\Controllers\Controller;
 use App\Models\Resposta;
 use App\Models\Chamado;
@@ -37,7 +38,7 @@ class RespostaController extends Controller
             $chamado->respostas()->save(
                 new Resposta(["conteudo" => $request->solicitacao, "user_id" =>  $request->user()->id])
             );
-
+            ChamadoRespondido::dispatch();
             return Response::json($chamado->respostas()->latest()->get()->first(), 201);
         } catch (\Throwable $th) {
             return Response(["mensagem" => $th->getMessage()], 203);
