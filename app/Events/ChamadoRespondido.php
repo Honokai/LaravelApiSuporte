@@ -9,15 +9,17 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ChamadoRespondido implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public string $chamado;
+    public int $chamado;
 
     public function __construct($chamado)
     {
+        Log::info("Meu chamado " . $chamado);
         $this->chamado = $chamado;
     }
 
@@ -33,6 +35,11 @@ class ChamadoRespondido implements ShouldBroadcast
 
     public function broadcastWith()
     {
-        return ['titulo' => '', 'mensagem' => "Seu chamado foi respondido"];
+        return ['titulo' => "Chamado #{$this->chamado}", 'mensagem' => "Seu chamado foi respondido"];
+    }
+
+    public function broadcastAs()
+    {
+        return 'ChamadoRespondido';
     }
 }
