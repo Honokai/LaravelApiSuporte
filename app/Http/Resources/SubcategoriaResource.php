@@ -14,7 +14,7 @@ class SubcategoriaResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "nome" => $this->nome,
+            "nome" => "$this->categoria->setor->nome - $this->nome",
         ];
     }
 }
