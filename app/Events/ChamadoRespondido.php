@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class ChamadoRespondido implements ShouldBroadcast
 {
@@ -19,7 +18,6 @@ class ChamadoRespondido implements ShouldBroadcast
 
     public function __construct($chamado)
     {
-        Log::info("Meu chamado " . $chamado);
         $this->chamado = $chamado;
     }
 
