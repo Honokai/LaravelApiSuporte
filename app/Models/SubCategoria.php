@@ -11,6 +11,13 @@ class SubCategoria extends Model
 
     protected $table = 'subcategorias';
 
+    protected $appends = ['subcategorianome'];
+
+    public function getSubcategoriaNomeAttribute()
+    {
+        return "{$this->categoria->setor->nome} - {$this->categoria->nome}/{$this->nome}";
+    }
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
