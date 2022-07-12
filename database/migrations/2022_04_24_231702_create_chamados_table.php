@@ -20,7 +20,7 @@ class CreateChamadosTable extends Migration
             $table->id();
             $table->string('solicitante');
             $table->text('solicitacao');
-            $table->enum('status', StatusEnum::getValues())->default(StatusEnum::ABERTO);
+            $table->enum('status', StatusEnum::getValues())->default(StatusEnum::Aberto);
             $table->foreignIdFor(Setor::class, 'setorOrigem_id');
             $table->foreignIdFor(SubCategoria::class, 'subcategoria_id');
             $table->timestamps();

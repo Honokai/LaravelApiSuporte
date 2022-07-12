@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\RespostaController;
 use App\Models\Localizacao;
 use App\Models\Setor;
 use App\Models\SubCategoria;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/login", [LoginController::class, "login"]);
@@ -17,7 +18,17 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/chamados/{setor}', [ChamadoController::class, 'index']);
 
     Route::get('/subcategorias', function() {
-        return SubCategoria::all();
+        if (request()?->exceto) {
+            return Subcategoria::whereHas('categoria', function (Builder $consulta) {
+                $consulta->where(
+                    'setor_id',
+                    '!=',
+                    Subcategoria::find(request()->exceto)->categoria->setor->id
+                );
+            })->get();
+        } else {
+            return SubCategoria::all();
+        }
     });
     
     Route::resource('chamado', ChamadoController::class)->only('store', 'destroy');

@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        \App\Models\User::factory(1)->create();
+        // \App\Models\User::factory(1)->create();
         // Setor::factory()->count(10)->create();
-        // Categoria::factory()->count(20)->create();
-        // SubCategoria::factory()->count(40)->create();
-        // Localizacao::factory()->count(20)->create();
+        Categoria::factory()->count(20)->create();
+        SubCategoria::factory()->count(40)->create();
+        Localizacao::factory()->count(20)->create();
         // Chamado::factory()->count(10)->create();
     }
 }

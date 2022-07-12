@@ -28,4 +28,9 @@ class Chamado extends Model
     {
         return $this->belongsTo(Setor::class, "setorOrigem_id");
     }
+
+    public function transferencias(): HasMany
+    {
+        return $this->hasMany(Transferencia::class);
+    }
 }
