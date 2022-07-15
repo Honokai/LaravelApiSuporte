@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\ChamadoController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RefreshToken;
 use App\Http\Controllers\Api\RespostaController;
+use App\Http\Controllers\Api\UserController;
 use App\Models\Localizacao;
 use App\Models\Setor;
 use App\Models\SubCategoria;
@@ -16,6 +18,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post("/sair", [LoginController::class, "logout"]);
 
     Route::get('/chamados/{setor}', [ChamadoController::class, 'index']);
+    Route::get('/user', [UserController::class, 'show']);
 
     Route::get('/subcategorias', function() {
         if (request()?->exceto) {

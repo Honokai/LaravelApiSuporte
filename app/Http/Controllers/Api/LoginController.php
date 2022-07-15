@@ -10,16 +10,14 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function login(Request $request)
     {
         if(Auth::attempt(["email" => $request->email, "password" => $request->password])) {
             $usuario = Auth::user();
-            return response()->json(["nome" => $usuario->name, "token" => $usuario->createToken("day")->plainTextToken]);
+            return response()->json([
+                "nome" => $usuario->name,
+                "token" => $usuario->createToken("day")->plainTextToken,
+            ]);
         }
 
         return response()->json(["mensagem" => "Parece que algo não funcionou."], 203);
