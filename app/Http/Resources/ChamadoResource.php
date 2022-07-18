@@ -20,6 +20,7 @@ class ChamadoResource extends JsonResource
             "subcategoria" => SubcategoriaResource::make($this->subcategoria),
             "setor" => SetorResource::make($this->setor), //considerar remocao
             "status" => StatusEnum::getKey(intval($this->status)),
+            "transferencias" => TransferenciaResource::collection($this->transferencias),
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
             "responsavel" => $this->responsavel,

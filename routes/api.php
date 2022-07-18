@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ChamadoController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RefreshToken;
 use App\Http\Controllers\Api\RespostaController;
+use App\Http\Controllers\Api\TransferenciaController;
 use App\Http\Controllers\Api\UserController;
 use App\Models\Localizacao;
 use App\Models\Setor;
@@ -34,7 +35,11 @@ Route::middleware('auth:sanctum')->group(function() {
         }
     });
     
-    Route::resource('chamado', ChamadoController::class)->only('store', 'destroy');
+    Route::resource('chamado', ChamadoController::class)->only('show', 'store', 'destroy');
+    Route::get('/chamados/{setor}', [ChamadoController::class, "index"])->name('chamado.index');
+
+    Route::resource('transferencia', TransferenciaController::class);
+    
     Route::get('/setores', function() {
         return Setor::all();
     });
@@ -43,8 +48,6 @@ Route::middleware('auth:sanctum')->group(function() {
         return Localizacao::all();
     });
     Route::post("/respostas", [RespostaController::class, "store"]);
-    Route::get('/chamado/{chamado}', [ChamadoController::class, "show"]);
-    Route::get('/chamados/{setor}', [ChamadoController::class, "index"]);
     
 });
 // Route::resource('chamados', ChamadoController::class);
