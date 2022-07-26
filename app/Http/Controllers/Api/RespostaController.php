@@ -34,6 +34,12 @@ class RespostaController extends Controller
     public function store(Request $request)
     {
         $chamado = Chamado::find($request->chamado);
+        return Response(["mensagem" => $request->chamado], 206);
+        if($request->hasFile('anexo')) {
+            return Response(["mensagem" => $chamado], 206);
+        } else {
+            return Response(["mensagem" => $chamado], 210);
+        }
         try {
             $chamado->respostas()->save(
                 new Resposta(["conteudo" => $request->solicitacao, "user_id" =>  $request->user()->id])
